@@ -200,6 +200,13 @@ public class HelloController extends SimpleGrpc.SimpleImplBase {
 }
 ```
 
+### application.yaml
+```yaml
+grpc:
+  server:
+    port: 8088
+```
+
 ## gRPC Client
 ### Maven
 <details>
@@ -302,4 +309,14 @@ public class GrpcService {
     return stub.sayHello(request).getMessage();
   }
 }
+```
+
+### application.yaml
+```yaml
+grpc:
+  client:
+    blockingStub:
+      address: "static://127.0.0.1:9090"
+      negotiation-type: plaintext
+
 ```
