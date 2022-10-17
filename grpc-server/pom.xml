@@ -19,8 +19,8 @@
 
     <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
     <docker.hub.host>registry.hub.docker.com</docker.hub.host>
-    <docker.hub.username>rolroralra</docker.hub.username>
-    <docker.hub.password>rlatlsdud1!</docker.hub.password>
+    <docker.hub.username>username</docker.hub.username>
+    <docker.hub.password>password</docker.hub.password>
     <interface.libs>${basedir}/../grpc-interface/target</interface.libs>
   </properties>
 
@@ -30,6 +30,7 @@
       <artifactId>grpc-server-spring-boot-starter</artifactId>
       <version>${grpc.spring.boot.starter.version}</version>
     </dependency>
+
     <dependency>
       <groupId>com.chacare.grpc</groupId>
       <artifactId>grpc-interface</artifactId>
