@@ -9,7 +9,6 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.chacare.grpc.server</groupId>
   <artifactId>grpc-server</artifactId>
 
   <properties>
@@ -17,6 +16,12 @@
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <grpc.spring.boot.starter.version>2.13.1.RELEASE</grpc.spring.boot.starter.version>
+
+    <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
+    <docker.hub.host>registry.hub.docker.com</docker.hub.host>
+    <docker.hub.username>rolroralra</docker.hub.username>
+    <docker.hub.password>rlatlsdud1!</docker.hub.password>
+    <interface.libs>${basedir}/../grpc-interface/target</interface.libs>
   </properties>
 
   <dependencies>
@@ -25,17 +30,10 @@
       <artifactId>grpc-server-spring-boot-starter</artifactId>
       <version>${grpc.spring.boot.starter.version}</version>
     </dependency>
-
     <dependency>
       <groupId>com.chacare.grpc</groupId>
       <artifactId>grpc-interface</artifactId>
       <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>com.chacare.grpc</groupId>
-      <artifactId>grpc-interface</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -50,6 +48,45 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>${jib-maven-plugin.version}</version>
+        <configuration>
+          <from>
+            <auth>
+              <username>${docker.hub.username}</username>
+              <password>${docker.hub.password}</password>
+            </auth>
+            <image>openjdk:17.0.2-jdk</image>
+          </from>
+          <to>
+            <auth>
+              <username>${docker.hub.username}</username>
+              <password>${docker.hub.password}</password>
+            </auth>
+            <image>rolroralra/${project.artifactId}</image>
+            <tags>
+              <tag>${project.version}</tag>
+              <tag>latest</tag>
+            </tags>
+          </to>
+          <container>
+            <ports>
+              <port>8080</port>
+            </ports>
+          </container>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

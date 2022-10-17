@@ -9,8 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.chacare.grpc.server</groupId>
-  <artifactId>grpc-server</artifactId>
+  <artifactId>grpc-client</artifactId>
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
@@ -25,7 +24,6 @@
       <artifactId>grpc-client-spring-boot-starter</artifactId>
       <version>${grpc.spring.boot.starter.version}</version>
     </dependency>
-
     <dependency>
       <groupId>com.chacare.grpc</groupId>
       <artifactId>grpc-interface</artifactId>
